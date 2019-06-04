@@ -1,0 +1,44 @@
+if [ $OSTYPE == darwin18 ]; then  # Mac
+	echo "here"
+	alias ll='ls -FGlAhp '
+	alias f='open -a Finder ./'              # Opens current directory in MacOS Finder
+elif [ $OSTYPE == linux-gnu ]; then
+    alias ll='gls -FGlAhp --group-directories-first'
+fi
+
+alias cp='cp -iv'                           # Preferred 'cp' implementation
+alias mv='mv -iv'                           # Preferred 'mv' implementation
+alias mkdir='mkdir -pv'                     # Preferred 'mkdir' implementation
+alias less='less -FSRXc'                    # Preferred 'less' implementation
+cd() { builtin cd "$@"; ll; }               # Always list directory contents upon 'cd'
+alias cd..='cd ../'                         # Go back 1 directory level (for fast typers)
+alias ..='cd ../'                           # Go back 1 directory level
+alias ...='cd ../../'                       # Go back 2 directory levels
+alias .3='cd ../../../'                     # Go back 3 directory levels
+alias .4='cd ../../../../'                  # Go back 4 directory levels
+alias .5='cd ../../../../../'               # Go back 5 directory levels
+alias .6='cd ../../../../../../'            # Go back 6 directory levels
+alias ~="cd ~"                              # ~:            Go Home
+alias c='clear'                             # c:            Clear terminal display
+alias which='type -all'                     # which:        Find executables
+alias path='echo -e ${PATH//:/\\n}'         # path:         Echo all executable Paths
+alias show_options='shopt'                  # Show_options: display bash options settings
+alias fix_stty='stty sane'                  # fix_stty:     Restore terminal settings when screwed up
+alias sync='cp -r -u -v'
+mcd () { mkdir -p "$1" && cd "$1"; }        # mcd:          Makes new Dir and jumps inside
+trash () { command mv "$@" ~/.Trash ; }     # trash:        Moves a file to the MacOS trash
+
+alias docker_clean_images='docker rmi $(docker images -a --filter=dangling=true -q)'
+alias docker_clean_ps='docker rm $(docker ps --filter=status=exited --filter=status=created -q)'
+alias dotfiles='git --git-dir=$HOME/.dotfiles/.git --work-tree=$HOME'
+alias gs='git status --column'
+alias git-commit='git rev-parse HEAD'
+alias ap='ansible-playbook'
+alias ag='ansible-galaxy'
+
+
+
+alias deploy_vm='python ~/Documents/hash-repo/vmware_scripts/deploy_MIN_template.py'
+alias list_vm='python  ~/Documents/hash-repo/vmware_scripts/list_vms.py'
+alias move_vm='python ~/Documents/hash-repo/vmware_scripts/move_vm_to_folder.py'
+alias dotfiles='/usr/bin/git --git-dir=$HOME/.dotfiles --work-tree=$HOME'
